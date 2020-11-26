@@ -136,11 +136,14 @@ def predict(INP_DIR, BATCH_SIZE, MODEL_PATH):
     # print(topk_ids)
     # print(topk_prob)
 
-    with open(os.path.join(args.output_dir, 'submission_{}.txt'.format(args.model)), 'w') as out_file:
+    out_path = os.path.join(args.output_dir, 'submission_{}.txt'.format(args.model))
+    with open(out_path, 'w') as out_file:
         filenames = loader.dataset.filenames(basename=True)
         for filename, label, prob in zip(filenames, topk_ids, topk_prob):
             out_file.write(("{}" + "\t{}\t{:.4f}"*5 + "\n").format(
                 filename, *chain(*zip(label, prob))))
+    
+    return out_path
 
 
 if __name__ == '__main__':

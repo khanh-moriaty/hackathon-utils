@@ -12,3 +12,7 @@
 - Sử dụng file <b>submission_viz.txt</b> để hiển thị lên giao diện interactive.
 - Sau khi interactive hoàn tất, tiến hành submit kết quả.
 - Nếu xảy ra trục trặc gì trong quá trình interactive, có thể nộp tạm file <b>submission.txt</b> đã qua post_proc.
+
+## Lưu ý:
+- Cần chỉnh sửa lại hàm predict.py để nó có thể hoạt động như 1 service (tức là load model lên sẵn từ trước và chỉ cần request bằng cách gửi đường dẫn thư mục)
+- File <b>submission_raw.txt</b> và <b>submission_viz.txt</b> đều kèm theo thông tin của top1 top2 nên không thể submit cho BTC được.
