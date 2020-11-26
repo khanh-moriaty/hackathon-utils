@@ -56,12 +56,19 @@ parser.add_argument('--topk', default=5, type=int,
                     metavar='N', help='Top-k to output to CSV')
 
 
-def predict(INP_DIR):
+def predict(INP_DIR, BATCH_SIZE, MODEL_PATH):
     setup_default_logging()
     args = parser.parse_args()
     # might as well try to do something useful...
-    args.pretrained = args.pretrained or not args.checkpoint
 
+    args.model = 'tf_efficientnet_b8'
+    args.data = INP_DIR
+    args.num_classes = 8
+    args.checkpoint = MODEL_PATH
+    args.batch_size = BATCH_SIZE
+
+    args.pretrained = args.pretrained or not args.checkpoint
+    
     # create model
     model = create_model(
         args.model,
