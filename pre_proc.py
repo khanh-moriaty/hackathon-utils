@@ -5,6 +5,7 @@ INP_DIR = '/dataset/test_set_A_full'
 
 
 # Lọc thư mục data test ra thành 3 thư mục: None, Square (1:1), và phần còn lại (đã được crop ngay chính giữa)
+# Trả về path dẫn đến 3 thư mục nói trên
 def pre_proc(INP_DIR):
     INP_DIR = INP_DIR + '/'
     NONE_DIR = os.path.dirname(INP_DIR) + '_none'
@@ -38,6 +39,8 @@ def pre_proc(INP_DIR):
             img = img[height//2-width//2:height//2+width//2, :]
             
         cv2.imwrite(os.path.join(CROP_DIR, fi), img)
+        
+    return NONE_DIR, SQUARE_DIR, CROP_DIR
         
 if __name__ == '__main__':
     pre_proc(INP_DIR)

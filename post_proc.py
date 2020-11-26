@@ -22,6 +22,7 @@ THRESHOLD = {
 }
 
 # Yêu cầu file inp_sub phải theo format "file_name  top1    score1  top2    score2"
+# Trả về path đến 2 file: (submission theo format btc, submission kèm theo score để viz)
 def post_proc(INP_SUB_PATH, INP_SUB_FILE, OUT_SUB_PATH, OUT_SUB_FILE, TEST_SET_DIR):
     fn, _ = os.path.splitext(OUT_SUB_FILE)
     test_dir = os.path.dirname(TEST_SET_DIR+'/')
@@ -81,13 +82,17 @@ def post_proc(INP_SUB_PATH, INP_SUB_FILE, OUT_SUB_PATH, OUT_SUB_FILE, TEST_SET_D
     # print(result)
     print(len(result))
 
-    with open(os.path.join(OUT_SUB_PATH, OUT_SUB_FILE), 'w') as f:
+    out_sub_path = os.path.join(OUT_SUB_PATH, OUT_SUB_FILE)
+    with open(out_sub_path, 'w') as f:
         for line in result:
             f.write('\t'.join(line[:2]) + '\n')
 
-    with open(os.path.join(OUT_SUB_PATH, "{}_viz.txt".format(fn)), 'w') as f:
+    out_sub_path_viz = os.path.join(OUT_SUB_PATH, "{}_viz.txt".format(fn))
+    with open(out_sub_path_viz, 'w') as f:
         for line in result:
             f.write('\t'.join(line) + '\n')
+            
+    return out_sub_path, out_sub_path_viz
             
             
 if __name__ == '__main__':
